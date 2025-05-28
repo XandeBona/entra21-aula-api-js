@@ -1,6 +1,10 @@
 let listaEnderecoPrincipal = [];
 
-function salvarEnderecoNaTabela(cep, rua, numero, bairro, cidade, estado) {
+function validarDuplicados() {
+    
+}
+
+function salvarEnderecoNaTabela(endereco) {
     const novaLinha = document.createElement('tr');
     const tabelaCep = document.createElement('td');
     const tabelaRua = document.createElement('td');
@@ -9,12 +13,12 @@ function salvarEnderecoNaTabela(cep, rua, numero, bairro, cidade, estado) {
     const tabelaCidade = document.createElement('td');
     const tabelaEstado = document.createElement('td');
 
-    tabelaCep.innerText = cep;
-    tabelaRua.innerText = rua;
-    tabelaNumero.innerText = numero;
-    tabelaBairro.innerText = bairro;
-    tabelaCidade.innerText = cidade;
-    tabelaEstado.innerText = estado;
+    tabelaCep.innerText = endereco.cep;
+    tabelaRua.innerText = endereco.rua;
+    tabelaNumero.innerText = endereco.numero;
+    tabelaBairro.innerText = endereco.bairro;
+    tabelaCidade.innerText = endereco.cidade;
+    tabelaEstado.innerText = endereco.estado;
 
     novaLinha.appendChild(tabelaCep);
     novaLinha.appendChild(tabelaRua);
@@ -44,8 +48,7 @@ function salvarEndereco() {
         estado: inputEstado.value
     }
 
-    console.log(novoEndereco);
-    salvarEnderecoNaTabela(novoEndereco.cep, novoEndereco.rua, novoEndereco.numero, novoEndereco.bairro, novoEndereco.cidade, novoEndereco.estado);
+    salvarEnderecoNaTabela(novoEndereco);
 
     listaEnderecoPrincipal.push(novoEndereco);
 
@@ -54,17 +57,11 @@ function salvarEndereco() {
 function buscarCep() {
     const inputCep = document.getElementById("input_cep");
     const valorCep = inputCep.value;
-    console.log("buscando cep " + valorCep)
     fetch("https://brasilapi.com.br/api/cep/v2/" + valorCep)
         .then((resposta) => {
             return resposta.json();
         })
         .then((json) => {
-            console.log("O Estado é " + json.state);
-            console.log("A cidade é " + json.city);
-            console.log("O bairro é " + json.neighborhood);
-            console.log("A rua é " + json.street);
-
             const inputRua = document.getElementById("input_rua");
             inputRua.value = json.street;
             const inputBairro = document.getElementById("input_bairro");
