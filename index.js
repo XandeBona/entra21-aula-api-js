@@ -1,11 +1,22 @@
 let listaEnderecoPrincipal = [];
 
-function validarDuplicados() {
-    
+//Função para validar se o endereço já foi cadastrado
+function validarDuplicados(novoEndereco) {
+    return listaEnderecoPrincipal.some(endereco =>
+        endereco.cep === novoEndereco.cep &&
+        endereco.rua === novoEndereco.rua &&
+        endereco.bairro === novoEndereco.bairro &&
+        endereco.cidade === novoEndereco.cidade &&
+        endereco.estado === novoEndereco.estado &&
+        endereco.numero === novoEndereco.numero
+    );
 }
 
+//Função para salvar os dados na tabela
 function salvarEnderecoNaTabela(endereco) {
+    //Cria a linha
     const novaLinha = document.createElement('tr');
+    //Cria as células (colunas)
     const tabelaCep = document.createElement('td');
     const tabelaRua = document.createElement('td');
     const tabelaNumero = document.createElement('td');
@@ -13,6 +24,7 @@ function salvarEnderecoNaTabela(endereco) {
     const tabelaCidade = document.createElement('td');
     const tabelaEstado = document.createElement('td');
 
+    //Faz com que as células puxem as informações do objeto
     tabelaCep.innerText = endereco.cep;
     tabelaRua.innerText = endereco.rua;
     tabelaNumero.innerText = endereco.numero;
@@ -20,6 +32,7 @@ function salvarEnderecoNaTabela(endereco) {
     tabelaCidade.innerText = endereco.cidade;
     tabelaEstado.innerText = endereco.estado;
 
+    //Faz com que a linha criada puxe as células com as informações
     novaLinha.appendChild(tabelaCep);
     novaLinha.appendChild(tabelaRua);
     novaLinha.appendChild(tabelaNumero);
@@ -27,10 +40,12 @@ function salvarEnderecoNaTabela(endereco) {
     novaLinha.appendChild(tabelaCidade);
     novaLinha.appendChild(tabelaEstado);
 
+    //Faz com que a linha que contém as células com informações seja adicionada na tabela
     const adicionaNaTabela = document.getElementById("div_tabela");
     adicionaNaTabela.appendChild(novaLinha);
 }
 
+//Função para salvar o endereço
 function salvarEndereco() {
     const inputCep = document.getElementById("input_cep");
     const inputRua = document.getElementById("input_rua");
@@ -39,21 +54,44 @@ function salvarEndereco() {
     const inputCidade = document.getElementById("input_cidade");
     const inputEstado = document.getElementById("input_estado");
 
+    //Valida se todos os inputs foram preenchidos
+    if (!inputCep.value || !inputCep.value || !inputNumero.value || !inputBairro.value || !inputCidade.value || !inputEstado.value) {
+        alert("Por favor, preencha todos os campos obrigatórios!");
+        return;
+    }
+
+    //Valida se o número do endereço é um número e não é negativo
+    const numero = parseInt(inputNumero.value);
+    if (isNaN(numero) || numero < 0) {
+        alert("O número do endereço precisa ser um número positivo.");
+        return;
+    }
+
+    //Cria um novo objeto
     const novoEndereco = {
         cep: inputCep.value,
         rua: inputRua.value,
-        numero: inputNumero.value,
+        numero: numero,
         bairro: inputBairro.value,
         cidade: inputCidade.value,
         estado: inputEstado.value
-    }
+    };
 
+    //Puxa a função que valida se o endereço já foi cadastrado anteriormente
+    if (validarDuplicados(novoEndereco)) {
+        alert("Esse endereço já foi cadastrado!");
+        return;
+    };
+
+    //Puxa a função para salvar os dados na tabela
     salvarEnderecoNaTabela(novoEndereco);
 
+    //Adiciona o objeto ao final do array
     listaEnderecoPrincipal.push(novoEndereco);
 
 }
 
+//Busca a API
 function buscarCep() {
     const inputCep = document.getElementById("input_cep");
     const valorCep = inputCep.value;
@@ -73,6 +111,7 @@ function buscarCep() {
         });
 }
 
+//Inicializa os eventos quando a página for carregada
 function configurarEventos() {
     const inputCep = document.getElementById("input_cep");
     inputCep.addEventListener("focusout", buscarCep);
