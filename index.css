@@ -1,0 +1,99 @@
+:root {
+    --cor-titulo: rgb(0, 104, 202);
+}
+
+/* Estilização geral do body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ececec;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+h2 {
+    color: var(--cor-titulo);
+}
+
+/* Estilização da div que envolve o formulário */
+.div_endereco {
+    background-color: rgb(252, 252, 252);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilização do label do formulário */
+.div_endereco label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c2c2c;
+}
+
+/* Estilização do input que envolve o formulário */
+.div_endereco input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+}
+
+/* Estilização da div que envolve a tabela */
+.div-tabela {
+    background-color: rgb(252, 252, 252);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 700px;
+    margin-top: 40px;
+}
+
+/* Estilização da tabela que apresenta os endereços */
+#tabela_endereco {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tabela_endereco th,
+#tabela_endereco td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Estilização do botão Salvar */
+#botao_salvar {
+    background-color: rgb(43, 126, 204);
+    color: white;
+    width: 60px;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#botao_salvar:hover {
+    background-color: rgb(0, 104, 202);
+}
+
+/* Para remover as setas do input tipo number */
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+}
+
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
+}

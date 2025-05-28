@@ -10,23 +10,33 @@
 </head>
 
 <body>
+    <!-- Formulário de cadastro de endereço -->
     <div class="div_endereco">
+        <h2>Cadastro de endereço</h2>
+        <!-- Input para receber o CEP -->
         <label for="input_cep">Digite o seu CEP: </label>
         <input type="text" id="input_cep" placeholder="CEP">
+        <!-- Input para receber o nome da Rua -->
         <label for="input_rua">Rua:</label>
         <input type="text" id="input_rua" placeholder="Rua">
         <label for="input_numero">Número:</label>
+        <!-- Input para receber o número da casa -->
         <input type="number" id="input_numero" placeholder="Número da casa">
         <label for="input_bairro">Bairro:</label>
+        <!-- Input para receber o nome do bairro -->
         <input type="text" id="input_bairro" placeholder="Bairro">
         <label for="input_cidade">Cidade:</label>
+        <!-- Input para receber o nome da cidade -->
         <input type="text" id="input_cidade" placeholder="Cidade">
         <label for="input_estado">Estado:</label>
+        <!-- Input para receber o nome do Estado -->
         <input type="text" id="input_estado" placeholder="Estado">
         <button id="botao_salvar">Salvar</button>
     </div>
-    <div id="div_tabela">
-        <table>
+    <!-- Tabela para armazenar os endereços cadastrados -->
+    <div id="div_tabela" class="div-tabela">
+        <h2>Lista de Endereços</h2>
+        <table id="tabela_endereco">
             <tr>
                 <th>CEP</th>
                 <th>Rua</th>

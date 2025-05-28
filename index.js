@@ -41,7 +41,7 @@ function salvarEnderecoNaTabela(endereco) {
     novaLinha.appendChild(tabelaEstado);
 
     //Faz com que a linha que contém as células com informações seja adicionada na tabela
-    const adicionaNaTabela = document.getElementById("div_tabela");
+    const adicionaNaTabela = document.getElementById("tabela_endereco");
     adicionaNaTabela.appendChild(novaLinha);
 }
 
@@ -63,7 +63,7 @@ function salvarEndereco() {
     //Valida se o número do endereço é um número e não é negativo
     const numero = parseInt(inputNumero.value);
     if (isNaN(numero) || numero < 0) {
-        alert("O número do endereço precisa ser um número positivo.");
+        alert("O número para o endereço é inválido!");
         return;
     }
 
