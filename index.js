@@ -88,6 +88,24 @@ function salvarEndereco() {
 
     //Adiciona o objeto ao final do array
     listaEnderecoPrincipal.push(novoEndereco);
+    localStorage.setItem("tabela_endereco", JSON.stringify(listaEnderecoPrincipal));
+
+}
+
+//Função para carregar os endereços que foram salvos anteriormente no localStorage ao abrir a página
+function carregarEnderecos() {
+    const storage = JSON.parse(localStorage.getItem("tabela_endereco"));
+    listaEnderecoPrincipal = storage ? storage : [];
+
+    for (let endereco of listaEnderecoPrincipal) {
+        cep = endereco.cep;
+        rua = endereco.rua;
+        numero = endereco.numero;
+        bairro = endereco.bairro;
+        cidade = endereco.cidade;
+        estado = endereco.estado;
+        salvarEnderecoNaTabela(endereco);
+    }
 
 }
 
@@ -113,6 +131,7 @@ function buscarCep() {
 
 //Inicializa os eventos quando a página for carregada
 function configurarEventos() {
+    carregarEnderecos();
     const inputCep = document.getElementById("input_cep");
     inputCep.addEventListener("focusout", buscarCep);
     const botaoSalvar = document.getElementById("botao_salvar");
