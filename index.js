@@ -60,6 +60,14 @@ function salvarEndereco() {
         return;
     }
 
+    //Valida se o CEP é valido
+    const cep = parseInt(inputCep.value);
+    const cepRegex = /^\d{8}$/;
+    if(isNaN(cep) || (!cepRegex.test(cep))) {
+        alert("Favor informar um CEP válido!")
+        return;
+    }
+    
     //Valida se o número do endereço é um número e não é negativo
     const numero = parseInt(inputNumero.value);
     if (isNaN(numero) || numero < 0) {
@@ -69,7 +77,7 @@ function salvarEndereco() {
 
     //Cria um novo objeto
     const novoEndereco = {
-        cep: inputCep.value,
+        cep: cep,
         rua: inputRua.value,
         numero: numero,
         bairro: inputBairro.value,
